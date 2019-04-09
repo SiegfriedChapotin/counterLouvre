@@ -1,0 +1,31 @@
+.imgBilletterie {
+    width: 100%;
+    height: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-left: 50px;
+    color:#002B36;
+    background-position:center;
+    background-image: url('../img/louvre-billetterie.jpg');
+}
+
+.block{
+    margin:20px 0px;
+}
+
+.card-header{
+    font-weight: bold;
+}
+.card-text{
+    padding:10px;
+}
+
+.card-subtext{
+    padding:0px 20px;
+}
+
+.btnForm, .btnForm:hover, .btnForm:active{
+    color:white;
+    text-decoration: none;
+}

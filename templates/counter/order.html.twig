@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Étape 3</div>
+        <div class="card-body">
+            <h5 class="card-title">Votre commande</h5>
+        </div>
+    </div>
+    <p class="block">
+    <p><strong class="text-primary">Votre commande</strong> est bientôt terminée, nous vous invitons à vérifier les
+        informations ci-dessous avant réglement.<p/>
+
+    <ul class="list-group ">
+        <li class="list-group-item">Date de votre visite : {{ reservation.entry|date ('d/m/Y') }}</li>
+        <li class="list-group-item">Type de billet :
+            {% if reservation.period==true %}
+                Vous visitez le Louvre toute la journée !
+            {% else %}
+                Nous vous souhaitons une bonne aprés-midi de curiosités !
+            {% endif %}
+        </li>
+        <li class="list-group-item">Nombre de billet(s) : {{ reservation.numberTicket }}</li>
+    </ul>
+    </p>
+    <wbr>
+    <h4>Bénéficiaire(s)</h4>
+
+    <div class="table-responsive" id="recap">
+        <table class="table recap">
+            <thead>
+            <tr>
+                <th id="center">Ticket</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Tarif</th>
+                <th id="center">Prix du billet</th>
+            </tr>
+            </thead>
+
+
+            <tbody>
+
+
+            <td>
+                <div class="champ"></div>
+            </td>
+            <td>
+                <div class="champ"></div>
+            </td>
+            <td>
+                <div class="champ"></div>
+            </td>
+            <td>
+                <div class="champ"></div>
+            </td>
+            <td>
+                <div class="champ"></div>
+            </td>
+            <td>
+                <div class="champ"></div>
+            </td>
+
+            </tbody>
+        </table>
+        <div class="row block">
+
+            <div class="col-6">
+                <button type="button" class="btn btn-primary btn-lg btn-block"><a class="btnForm"
+                                                                                  href="{{ path('booking_tickets') }}">Etape
+                        précédente</a></button>
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Paiement</button>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

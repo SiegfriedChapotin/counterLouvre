@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% form_theme ticketsForm 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Étape 2</div>
+        <div class="card-body">
+            <h5 class="card-title">Coordonnées</h5>
+        </div>
+    </div>
+
+    <p class="block">
+    <p><strong class="text-primary">Les billets sont nominatifs.</strong> Veuillez renseigner les informations demandées
+        pour chaque bénéficiaire.<p/>
+
+    <ul class="list-group ">
+        <li class="list-group-item">Date de votre visite : {{ reservation.entry|date ('d/m/Y')}}</li>
+        <li class="list-group-item">Type de billet :
+            {% if reservation.period==true %}
+                Vous visitez le Louvre toute la journée !
+            {% else %}
+                Nous vous souhaitons une bonne aprés-midi de curiosités !
+            {% endif %}
+        </li>
+        <li class="list-group-item">Nombre de billet(s) : {{ reservation.numberTicket }}</li>
+    </ul>
+    </p>
+
+    {{ form_start(ticketsForm) }}
+
+
+    {% for ticketForm in ticketsForm.tickets %}
+
+
+        <div class="card border-dark mb-3">
+            <div class="card-header">Visiteur n° {{ loop.index }} </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.name) }}</div>
+                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.firstname) }}</div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.birthday) }}</div>
+                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.nationality) }}</div>
+                </div>
+            </div>
+            <div class="card-header">{{ form_label(ticketForm.reduced) }}<br/>{{ form_widget(ticketForm.reduced) }} </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="row block">
+        <div class="col-6"> <button type="button" class="btn btn-primary btn-lg btn-block"> <a class="btnForm" href="{{ path('booking') }}">Etape précédente</a></button></div>
+        <div class="col-6"> <button type="submit" class="btn btn-primary btn-lg btn-block">Etape suivante</button></div>
+    </div>
+    {{ form_end(ticketsForm) }}
+
+
+{% endblock %}

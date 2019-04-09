@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Louvre Ticket{% endblock %}</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/counterLouvre.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+<div class="container">
+
+    <div class="imgBilletterie">
+        <h1>Bienvenue au Louvre</h1>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ path('booking') }}">Louvre le guichet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="container-fluide block">
+        <div class="row block">
+            <div class=" text-justify">
+                <h1>Le Louvre maintenant !</h1>
+                <div>
+                    Bienvenue sur la billeterie en ligne du Louvre . Gagnez du temps, procurez vous vos entrées  en seulement quelques cliques. <br/>
+                    Achat maximum six (6) Tickets. Les Billets sont nominatifs et valables seulement le jour sélectionné.<br/>
+                    Paiement en ligne par carte bancaire. <br/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row block">
+            <div class="col-12 col-md-12 col-sm-12 col-lg-8 text-justify">
+                {% block body %}
+                {% endblock %}
+            </div>
+            <div class="col-12 col-md-12 col-sm-12 col-lg-4 text-justify">
+                <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+                    <div class="card-header">Informations pratiques</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Horaire</h4>
+                        <p class="card-text">
+                            Ouvert tous les jours de 9h à 18h.
+                        </p>
+                        <h5 class="card-title"> Fermetures</h5>
+                        <p class="card-text">
+                            Tous les mardis<br/>
+                            Les 1er mai, 1er novembre et 25 décembre
+                        </p>
+                        <h5 class="card-title">Tarifs</h5>
+                        <p class="card-text">
+                            Tarif normal :<br/>
+                            <a class="text-muted card-subtext block">Plus de 12 ans : 16 euros</a><br/>
+                            Tarif enfant* :<br/>
+                            <a class="text-muted card-subtext block">De 4 à 11 ans : 8 euros</a><br/>
+                            <a class="text-muted card-subtext block">Moins de 4 ans : gratuit</a><br/>
+                            Tarif senior* :<br/>
+                            <a class="text-muted card-subtext block">A partir de 60 ans : 12 euros</a><br/>
+                            Tarif réduit* :<br/>
+                            <a class="text-muted card-subtext block">10 euros</a><br/>
+                        <p class="card-text">
+                            <a class="text-secondary">*Tarifs et accès libres accordés sur présentation d'un
+                                justificatif en cours de validité, ou de moins d'un an, nominatif et avec photographie,
+                                ou accompagné d'un document d'identité.</a>
+                        </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="row">
+            <div class="col-3">
+                <a href="https://www.ticketlouvre.fr/louvre/b2c/index.cfm/CGV">Mentions légales - CGV</a>
+            </div>
+            <div class="col-6">
+
+            </div>
+            <div class="col-3">
+                Musée du Louvre © 2019
+            </div>
+
+        </div>
+    </footer>
+
+    {% block javascripts %}
+    {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/js/main.js"></script>
+</div>
+</body>
+</html>
+
+

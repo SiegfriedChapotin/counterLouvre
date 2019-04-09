@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% form_theme bookingForm 'bootstrap_4_layout.html.twig'%}
+
+
+{% block body %}
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Étape 1</div>
+        <div class="card-body">
+            <h5 class="card-title">Choix du/des billet(s)</h5>
+        </div>
+    </div>
+
+    {{ form_start(bookingForm) }}
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">Jour de visite</div>
+        <div class="card-body">
+            {{ form_widget(bookingForm.entry) }}
+        </div>
+    </div>
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">Type de réservation</div>
+        <div class="card-body">
+            {{ form_widget(bookingForm.period) }}
+        </div>
+    </div>
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">Nombre de réservation</div>
+        <div class="card-body">
+            <p>Au-delà de 6 billets, reservation et paiement au guichet. voir Tarification groupe</p>
+            {{ form_widget(bookingForm.numberTicket) }}
+        </div>
+    </div>
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">Votre courriel</div>
+        <div class="card-body">
+            <p>Vos billets vous seront adressés par mail. Veuillez indiquer une adresse mail valide.</p>
+            {{ form_widget(bookingForm.email) }}
+        </div>
+    </div>
+
+    <div class="block">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Etape suivante</button>
+    </div>
+
+    {{ form_end(bookingForm) }}
+
+{% endblock %}
