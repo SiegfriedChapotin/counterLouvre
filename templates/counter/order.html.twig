@@ -27,46 +27,45 @@
     </ul>
     </p>
     <wbr>
-    <h4>Bénéficiaire(s)</h4>
+    <h4>Votre commande</h4>
 
     <div class="table-responsive" id="recap">
-        <table class="table recap">
+        <table class="table table-striped">
             <thead>
             <tr>
-                <th id="center">Ticket</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Date de naissance</th>
-                <th>Tarif</th>
-                <th id="center">Prix du billet</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th class="text-center" scope="col">Date de naissance</th>
+                <th class="text-center" scope="col">Tarif</th>
+                <th class="text-center" scope="col">Prix du billet</th>
             </tr>
             </thead>
 
 
             <tbody>
 
+            {% for ticket in reservation.tickets %}
 
-            <td>
-                <div class="champ"></div>
-            </td>
-            <td>
-                <div class="champ"></div>
-            </td>
-            <td>
-                <div class="champ"></div>
-            </td>
-            <td>
-                <div class="champ"></div>
-            </td>
-            <td>
-                <div class="champ"></div>
-            </td>
-            <td>
-                <div class="champ"></div>
-            </td>
+                <tr scope="row">
+                    <td>{{ ticket.name|upper }}</td>
+                    <td>{{ ticket.firstname }}</td>
+                    <td class="text-center">{{ ticket.birthday|date ('d/m/Y') }}</td>
+                    <td class="text-center">{{ ticket.reduced }}</td>
+                    <td class="text-right">{{ ticket.price|number_format(2, ',', ' ') }} €</td>
+                </tr>
 
+            {% endfor %}
             </tbody>
         </table>
+
+        <div class="card text-white bg-dark mb-3">
+
+            <div class="js-price-amount card-body text-right" data-price ="{{ reservation.totalAmount * 100 }}">
+                <h5 class="card-title">Montant Total : {{ reservation.totalAmount }} €</h5>
+            </div>
+        </div>
+
+
         <div class="row block">
 
             <div class="col-6">
@@ -76,10 +75,11 @@
             </div>
 
             <div class="col-6">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Paiement</button>
+                <button id="customButton" type="submit" class="btn btn-primary btn-lg btn-block">Paiement</button>
             </div>
         </div>
 
-
     </div>
+
+
 {% endblock %}

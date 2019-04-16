@@ -49,11 +49,11 @@ class CounterController extends AbstractController
     /**
      * @Route("/tickets", name="booking_tickets")
      */
-    public function bookingTicketsAction( Request $request, PriceCalculator $priceCalculator)
+    public function bookingTicketsAction(Request $request, PriceCalculator $priceCalculator)
     {
         $booking = $request->getSession()->get('booking');
 
-        if (!$booking){
+        if (!$booking) {
             return $this->redirectToRoute('booking');
         }
 
@@ -61,10 +61,12 @@ class CounterController extends AbstractController
 
         for ($i = $booking->getTickets()->count(); $i < $nbTicket; $i++) {
             $booking->addTicket(new Ticket());
-            $priceCalculator->computePrice($$booking);
+
         }
 
-        for ($i = $nbTicket; $i < $booking->getTickets()->count(); $i++) {
+        $initNbTicket = $booking->getTickets()->count();
+
+        for ($i = $nbTicket; $i < $initNbTicket; $i++) {
             $booking->removeTicket($booking->getTickets()->last());
         }
 
@@ -73,12 +75,13 @@ class CounterController extends AbstractController
 
         if ($ticketsForm->isSubmitted() && $ticketsForm->isValid()) {
 
+            $priceCalculator->computePrice($booking);
             return $this->redirectToRoute('indent_order', ['booking' => $booking->getId()]);
         }
 
         return $this->render('counter/booking_tickets.html.twig', [
             'ticketsForm' => $ticketsForm->createView(),
-            'reservation'=>$booking
+            'reservation' => $booking
 
         ]);
     }
@@ -86,14 +89,13 @@ class CounterController extends AbstractController
     /**
      * @Route("/order", name="indent_order")
      */
-    public function indentAction(Request $request )
+    public function indentAction(Request $request)
     {
         $booking = $request->getSession()->get('booking');
 
-
         return $this->render('counter/order.html.twig', [
+            'reservation' => $booking
 
-            'commande'=>$booking
         ]);
     }
 }

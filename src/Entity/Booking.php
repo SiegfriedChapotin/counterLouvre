@@ -25,7 +25,7 @@ class Booking
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      */
     private $entry;
 
@@ -76,12 +76,12 @@ class Booking
         return $this;
     }
 
-    public function getEntry(): ?string
+    public function getEntry(): ?\DateTime
     {
         return $this->entry;
     }
 
-    public function setEntry(string $entry): self
+    public function setEntry(\DateTime $entry): self
     {
         $this->entry = $entry;
 

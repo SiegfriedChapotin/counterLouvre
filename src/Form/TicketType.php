@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,23 +37,12 @@ class TicketType extends AbstractType
                 ]
             ])
             ->add('nationality', CountryType::class, [
+                'preferred_choices' => array('FR'),
                 'label' => 'Nationalité',
             ])
-            ->add('reduced', ChoiceType::class, [
+            ->add('reduced', CheckboxType::class, [
                 'label' => 'Réduction',
-                'attr' => [
-                    'required'
-                ],
-                'choices' => [
-                    'Aucune' => '1',
-                    'Adhérents' => '0',
-                    'Personnels' => '0',
-                    'Guides et conférenciers' => '0',
-                    'Bénéficiaires des minima sociaux' => '0',
-                    'Demandeurs d\'emploi' => '0',
-                    'Pass éducation' => '0',
-                    'Étudiant' => '0'
-                ]
+                'required' => false,
             ]);
     }
 

@@ -45,7 +45,7 @@ class PriceCalculator
 
         foreach ($tickets as $ticket) {
             $price = 0;
-            $age = $ticket->getBirthdate()->diff($dateOfVisit)->format('%y');
+            $age = $ticket->getBirthday()->diff($dateOfVisit)->format('%y');
 
 
 
@@ -59,7 +59,7 @@ class PriceCalculator
                 $price = self::SENIOR_PRICE;
             }
 
-            if ($ticket->getReducedPrice() && $price > self::REDUCED_PRICE) {
+            if ($ticket->getReduced() && $price > self::REDUCED_PRICE) {
                 $price = self::REDUCED_PRICE;
             }
 

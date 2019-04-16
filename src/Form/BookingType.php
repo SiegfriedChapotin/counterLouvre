@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Booking;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +23,11 @@ class BookingType extends AbstractType
                     'placeholder' => 'mon.courriel@internet.fr'
                 ]
             ])
-            ->add('entry',TextType::class,[
+            ->add('entry',DateType::class,[
+                'widget'=>'single_text',
+                'format'=>'dd-MM-yyyy',
+                'required'=>true,
                 'attr' => [
-                    'required',
                     'class' => 'datepicker',
                     'placeholder' => 'Sélectionner une date']
             ])

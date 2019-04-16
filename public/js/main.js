@@ -1,24 +1,25 @@
-$(function($){
-
-    var array = ["Tue"]
-
-    $('.datepicker').datepicker({
-
-        beforeShowDay: function(date){
-            var string = jQuery.datepicker.formatDate('D', date);
-            return [ array.indexOf(string) == -1 ]
-        },
-
-        dayNames :["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
-        dayNamesShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-        dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
-        monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-        monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jui", "Aoû", "Sep", "Oct", "Nov", "Déc"],
-        format: "dd/mm/yyyy",
+$(function () {
+    $.fn.datepicker.dates['fr'] = {
+        days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+        daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+        months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jui", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+        format: "yyyy-mm-dd",
         titleFormat: "MM yyyy",
-        firstDay: 1,
-        minDate: 0
+        weekStart: 0
+    };
+    $('.datepicker').datepicker({
+        format: "dd-mm-yyyy",
+        startDate: "new Date()",
+        language: "fr",
+        multidate: false,
+        keyboardNavigation: false,
+        daysOfWeekDisabled: "0,2",
+        autoclose: true,
+        todayHighlight: true,
+        datesDisabled: ['01/05/yyyy', '01/11/2018', '25/12/2018'],
+        toggleActive: true
     });
 
-
-});
+})
