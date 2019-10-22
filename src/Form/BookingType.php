@@ -11,27 +11,40 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class, [
-                'attr'=>[
-                    'required',
-                    'placeholder' => 'mon.courriel@internet.fr'
-                ]
+            ->add('email', RepeatedType::class, [
+
+                'type' => EmailType::class,
+                'invalid_message' => 'Vos courriels ne sont pas identiques.',
+                'required' => true,
+                'first_options' => [
+                    'label' => 'Votre courriel',
+                    'attr' => [
+                        'placeholder' => 'mon.courriel@internet.fr',
+                    ],
+                ],
+                'second_options' => [
+                    'label' => 'confimer votre courriel',
+                    'attr' => [
+                        'placeholder' => 'mon.courriel@internet.fr',
+                    ],
+                ],
             ])
-            ->add('entry',DateType::class,[
-                'widget'=>'single_text',
-                'format'=>'dd-MM-yyyy',
-                'required'=>true,
+            ->add('entry', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'required' => true,
                 'attr' => [
                     'class' => 'datepicker',
                     'placeholder' => 'Sélectionner une date']
             ])
-            ->add('period', ChoiceType::class,[
+            ->add('period', ChoiceType::class, [
                 'attr' => [
                     'required'
                 ],
@@ -45,9 +58,7 @@ class BookingType extends AbstractType
                     'max' => '6',
                     'min' => '1',
                     'value' => '1'],
-            ])
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

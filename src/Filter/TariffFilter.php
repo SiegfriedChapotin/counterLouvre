@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: julien
- * Date: 14/02/2018
- * Time: 11:48
- */
 
 namespace App\Filter;
 

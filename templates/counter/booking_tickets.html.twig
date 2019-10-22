@@ -35,19 +35,47 @@
 
 
         <div class="card border-dark mb-3">
-            <div class="card-header">Visiteur n° {{ loop.index }} </div>
+            <div class="card-header"><strong class="text-primary">Visiteur n° {{ loop.index }}</strong> </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.name) }}</div>
-                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.firstname) }}</div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card border-dark mb-3">
+                            <div class="card-header">Nom</div>
+                            <div class="card-body">
+                                {{ form_widget(ticketForm.name) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card border-dark mb-3">
+                            <div class="card-header">Prénom</div>
+                            <div class="card-body">
+                                {{ form_widget(ticketForm.firstname) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br/>
                 <div class="row">
-                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.birthday) }}</div>
-                    <div class="col-12 col-md-6">{{ form_widget(ticketForm.nationality) }}</div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card border-dark mb-3">
+                            <div class="card-header">Date de naissance</div>
+                            <div class="card-body">
+                                {{ form_widget(ticketForm.birthday) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card border-dark mb-3">
+                            <div class="card-header">Nationalité</div>
+                            <div class="card-body">
+                                {{ form_widget(ticketForm.nationality) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="card-header">{{ form_label(ticketForm.reduced) }}<br/>{{ form_widget(ticketForm.reduced) }} </div>
             </div>
-            <div class="card-header">{{ form_label(ticketForm.reduced) }}<br/>{{ form_widget(ticketForm.reduced) }} </div>
         </div>
 
     {% endfor %}

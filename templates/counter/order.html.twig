@@ -7,12 +7,12 @@
     <div class="card text-white bg-dark mb-3">
         <div class="card-header">Étape 3</div>
         <div class="card-body">
-            <h5 class="card-title">Votre commande</h5>
+            <h5 class="card-title">Commande</h5>
         </div>
     </div>
     <p class="block">
     <p><strong class="text-primary">Votre commande</strong> est bientôt terminée, nous vous invitons à vérifier les
-        informations ci-dessous avant réglement.<p/>
+        informations ci-dessous avant règlement.<p/>
 
     <ul class="list-group ">
         <li class="list-group-item">Date de votre visite : {{ reservation.entry|date ('d/m/Y') }}</li>
@@ -58,7 +58,7 @@
             </tbody>
         </table>
 
-        <div class="card text-white bg-dark mb-3">
+        <div class="row block card text-white bg-dark mb-3">
 
             <div class="js-price-amount card-body text-right" data-price ="{{ reservation.totalAmount * 100 }}">
                 <h5 class="card-title">Montant Total : {{ reservation.totalAmount }} €</h5>
@@ -75,11 +75,13 @@
             </div>
 
             <div class="col-6">
-                <button id="customButton" type="submit" class="btn btn-primary btn-lg btn-block">Paiement</button>
+                <button id="customButton" type="submit" class="btn btn-primary btn-lg btn-block"><a class="btnForm" href="{{ path('payment_order') }}">Paiement</a></button>
             </div>
         </div>
 
     </div>
+    <div id="stripe" data-stripe-public-key="{{ stripePublicKey }}"></div>
+
 
 
 {% endblock %}

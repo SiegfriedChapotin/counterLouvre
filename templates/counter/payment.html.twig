@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Étape 4</div>
+        <div class="card-body">
+            <h5 class="card-title">Réglement</h5>
+        </div>
+    </div>
+    <div class="block">
+        <p><strong class="text-primary">Votre paiement</strong> validé, vous recevrez un courriel avec l’ensemble de vos
+            tickets. N’oubliez pas de vérifier vos spam.
+        <p/>
+    </div>
+    <div class="block">
+        <div class="row justify-content-end">
+            <div class="col-12 col-sm-6">
+                <div class="text-center block"><a class="logoLouvre"><img class="logoLouvre" src="{{ asset('img/logo-louvre.jpg') }}"/></a></div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <ul class="list-group">
+                    <li class=" list-group-item card text-white bg-dark mb-3">Votre commande</li>
+                    <li class="list-group-item">Date de votre visite : {{ payment.entry|date ('d/m/Y') }}</li>
+                    <li class="list-group-item">Nombre de billet(s) : {{ payment.numberTicket }}</li>
+                    <li class="list-group-item">Vos billets seront envoyés à :<br/>
+                        <p class="pay card-title text-center">{{ payment.email }}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="js-price-amount text-right" data-price="{{ payment.totalAmount * 100 }}">
+                            <h5 class="card-title">Montant Total : <span class="pay">{{ payment.totalAmount }} €</span>
+                            </h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <wbr>
+    <h4></h4>
+    <div>
+          <div class="container">
+            <div class="card text-white bg-dark mb-3">
+                <div class="row justify-content-center ">
+                    <div class="col-10">
+                        {{ form_start(form, {'attr': {'id': 'payment-form', 'data-key': stripePublicKey}}) }}
+                        {{ form_widget(form) }}
+                        <form action="/" method="post" id="payment-form">
+                            <div class="form-row container">
+                                <label for="card-element">
+                                    Paiement par carte de crédit uniquement
+                                </label>
+                                <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                </div>
+
+                                <!-- Used to display form errors. -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+
+                            <div class="form-row container">
+                                <button id="customButton" type="submit" class="btn btn-primary btn-lg btn-block">payer
+                                </button>
+                            </div>
+                        </form>
+                        {{ form_end(form) }}
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

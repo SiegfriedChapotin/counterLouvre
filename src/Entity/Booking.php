@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -12,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Booking
 {
+    const WAITING_PAYMENT = 0;
+    const PAYED = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,32 +25,43 @@ class Booking
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="mail",type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "le courriel '{{ value }}' n'est pas un courriel valide.",
+     *  )
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
+     *
      */
     private $entry;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type(type="bool")
      */
     private $period;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="integer")
      */
     private $numberTicket;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $createAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="tickets", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="tickets",cascade={"persist"})
      */
     private $tickets;
 
@@ -53,16 +69,19 @@ class Booking
      * @ORM\Column(type="float")
      */
     private $totalAmount;
+    private $state;
 
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->createAt=new \DateTime();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getEmail(): ?string
     {
@@ -163,6 +182,22 @@ class Booking
     public function setTotalAmount(float $totalAmount): self
     {
         $this->totalAmount = $totalAmount;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): self
+    {
+        if ($state !== self::WAITING_PAYMENT && $state !== self::PAYED) {
+            throw new \Exception('State invalid');
+        }
+
+        $this->state = $state;
 
         return $this;
     }

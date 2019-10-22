@@ -5,8 +5,9 @@
     <title>{% block title %}Louvre Ticket{% endblock %}</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="{{ asset('css/counterLouvre.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/counterLouvre.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/stripe.css') }}">
 
     {% block stylesheets %}{% endblock %}
 </head>
@@ -15,26 +16,20 @@
 <div class="container">
 
     <div class="imgBilletterie">
-        <h1>Bienvenue au Louvre</h1>
+        <h1 class="card-header">Le Louvre</h1>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('booking') }}">Louvre le guichet</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    <div class="card text-white bg-dark mb-3 cardSizeMax">
+        <div class="card-header">
+            <h2><a class="text-white" href="{{ path('booking') }}">Bienvenue au musée</a></h2>
+        </div>
+    </div>
 
     <div class="container-fluide block">
         <div class="row block">
-            <div class=" text-justify">
-                <h1>Le Louvre maintenant !</h1>
-                <div>
-                    Bienvenue sur la billeterie en ligne du Louvre . Gagnez du temps, procurez vous vos entrées  en seulement quelques cliques. <br/>
-                    Achat maximum six (6) Tickets. Les Billets sont nominatifs et valables seulement le jour sélectionné.<br/>
-                    Paiement en ligne par carte bancaire. <br/>
-                </div>
+            <div class="text-muted card-subtext card-header block">
+                Vous êtes sur la billetterie en ligne du Louvre . Gagnez du temps, procurez vous vos entrées en seulement quelques cliques.  Vous pouvez commander un maximum de six (6) Tickets. Vos Billets seront nominatifs, valables seulement le jour sélectionné et envoyés par courriel.<br/>
+                Paiement en ligne par carte bancaire.
             </div>
         </div>
 
@@ -44,7 +39,7 @@
                 {% endblock %}
             </div>
             <div class="col-12 col-md-12 col-sm-12 col-lg-4 text-justify">
-                <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+                <div class="card text-white bg-dark mb-3 cardSizeMax">
                     <div class="card-header">Informations pratiques</div>
                     <div class="card-body">
                         <h4 class="card-title">Horaire</h4>
@@ -68,9 +63,7 @@
                             Tarif réduit* :<br/>
                             <a class="text-muted card-subtext block">10 euros</a><br/>
                         <p class="card-text">
-                            <a class="text-secondary">*Tarifs et accès libres accordés sur présentation d'un
-                                justificatif en cours de validité, ou de moins d'un an, nominatif et avec photographie,
-                                ou accompagné d'un document d'identité.</a>
+                            <a class="text-secondary">*Tarifs et accès libres accordés sur présentation d'un justificatif en cours de validité, ou de moins d'un an, nominatif et avec photographie, ou accompagné d'un document d'identité.</a>
                         </p>
                         </p>
                     </div>
@@ -81,13 +74,10 @@
 
     <footer>
         <div class="row">
-            <div class="col-3">
+            <div class="col-6">
                 <a href="https://www.ticketlouvre.fr/louvre/b2c/index.cfm/CGV">Mentions légales - CGV</a>
             </div>
-            <div class="col-6">
-
-            </div>
-            <div class="col-3">
+            <div class="col-6 text-right">
                 Musée du Louvre © 2019
             </div>
 
@@ -107,12 +97,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script src="https://checkout.stripe.com/checkout.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('/js/main.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/stripe.js') }}"></script>
+
+    <script src="{{ asset('assets/js/main.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/stripe.js') }}"></script>
 
 </div>
 </body>

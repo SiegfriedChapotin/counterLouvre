@@ -5,16 +5,19 @@
     margin-bottom: 10px;
     padding-top: 20px;
     padding-left: 50px;
-    color:#002B36;
+    color:#624627;
     background-position:center;
-    background-image: url('../img/louvre-billetterie.jpg');
+    background-image: url('../../img/louvre-billetterie.jpg');
 }
 
+.logoLouvre{
+    width: 80%;
+}
 .block{
     margin:20px 0px;
 }
 
-.card-header{
+.card-header, .navbar-brand{
     font-weight: bold;
 }
 .card-text{
@@ -28,4 +31,14 @@
 .btnForm, .btnForm:hover, .btnForm:active{
     color:white;
     text-decoration: none;
+}
+
+.pay{
+    color:rgb(236,110,65);
+    font-weight: bold;
+
+}
+
+.cardSizeMax{
+    max-width: 100%;
 }

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Étape 5</div>
+        <div class="card-body">
+            <h5 class="card-title">Vos tickets sont dans votre boite Mail</h5>
+        </div>
+    </div>
+    <div class="block">
+        <p><strong class="text-primary">A bientôt au musée du Louvre,</strong> pour vous y rendre facilement, tous les accès sont indiqués ici .
+        <p/>
+    </div>
+    <div class="block">
+        <div class="row justify-content-end">
+            <div class="col-12 col-sm-6">
+                <div class="text-center block"><a class="logoLouvre"><img class="logoLouvre" src="{{ asset('img/logo-louvre.jpg') }}"/></a></div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <ul class="list-group">
+                    <li class=" list-group-item card text-white bg-dark mb-3">Votre commande</li>
+                    <li class="list-group-item">Date de votre visite : {{ payment.entry|date ('d/m/Y') }}</li>
+
+                    <li class="list-group-item">Nombre de billet(s) : {{ payment.numberTicket }}</li>
+                    <li class="list-group-item">Vos billets seront envoyés à :<br/>
+                        <p class="pay card-title text-center">{{ payment.email }}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="js-price-amount text-right" data-price="{{ payment.totalAmount * 100 }}">
+                            <h5 class="card-title">Montant Total : <span class="pay">{{ payment.totalAmount }} €</span>
+                            </h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <wbr>
+
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Paiement Réussi !
+        </div>
+        <div class="card-body">
+
+                <button id="customButton" type="reset" class="btn btn-primary btn-lg btn-block"> <a class="btnForm" href="{{ path('booking') }}">Retour Guichet</a>
+                </button>
+
+        </div>
+    </div>
+
+{% endblock %}

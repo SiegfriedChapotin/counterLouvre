@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\CheckBirthDate;
+use App\Validator\AllowFullDay;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
@@ -17,26 +20,39 @@ class Ticket
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\LessThan("today")
+     * @CheckBirthDate()
      * @ORM\Column(type="datetime")
      */
     private $birthday;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Country
      * @ORM\Column(type="string", length=255)
      */
     private $nationality;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type(type="bool")
+     * @AllowFullDay
      * @ORM\Column(type="boolean")
      */
     private $Reduced;
@@ -48,6 +64,7 @@ class Ticket
     private $booking;
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="integer")
      */
     private $price;
