@@ -1,49 +1,69 @@
-
-{% block subject %}
-    Votre réservation pour la visite du musée du Louvre le {{book.entry|date('d-m-Y')}} a été validée.
-{% endblock %}
-
 {% block body_html %}
-<div style="background-color: #C0C0C0;"><a href="http://www.louvre.fr/"><img src="https://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" alt="header"></a></div>
+
 {% block body %}
 
 <div class="container">
     <br />
-    <div>
+    <div style="padding-left: 50px;">
+
         <p style="text-align: justify;">Bonjour, <br /><br />
             Nous avons le plaisir de vous confirmer la validation de votre réservation pour l'entrée du musée du Louvre.
-            Vous trouverez ci-dessous le récapitulatif de celle-ci. <br /><br />
+            Vous trouverez ci-dessous le récapitulatif de celle-ci. <br />
             <strong>Attention: </strong> Cet Email fera office de billet d'entrée. Il sera à présenter à l'entrée du musée.
         </p>
-    </div>
-    <h4>Votre Réservation</h4>
-    <p> Date de visite : <strong>{{ book.entry|date ('d/m/Y') }}</strong><br>
-    </p>
-    <div class="row">
-        <div class="col-md-10" style="margin-left: 20px;">
-            <h5>Vos Billets :</h5>
-            {% for ticket in book.tickets %}
-                <div class="card-block" style="border: solid; border-color: #C0C0C0; padding: 15px; border-radius: 10px;">
-                    Nom : {{ ticket.name|capitalize }}<br>
-                    Prénom  : {{ ticket.firstname|capitalize }}<br>
-                    Date de Naissance : {{ ticket.birthday|date('d-m-Y') }}<br>
+        <ul class="list-group ">
+            <li class="list-group-item">Type de billet :
+                {% if book.period==true %}
+                    Vous visitez le Louvre toute la journée !
+                {% else %}
+                    Nous vous souhaitons une bonne aprés-midi de curiosités !
+                {% endif %}
+            </li>
+            <li class="list-group-item">Nombre de billet(s) : {{ book.numberTicket }}</li>
+            <li class="list-group-item"><strong>Date de visite :</strong> {{ book.entry|date ('d/m/Y') }}</li>
+            <li class="list-group-item"> <strong>Montant de la commande TTC :</strong> {{ book.totalAmount }} €</li>
+        </ul>
 
-                    Prix du billet : {{ ticket.price|number_format(2, ',', ' ') }} €<br>
-
-                    {% if  ticket.reduced == 1  %}
-                        <br>
-                        Tarif réduit : Oui*
-                    {%endif%}
-                </div>
-            {% endfor %}
-        </div><br />
-        <br />
-        <p style="text-align: right;">
-            <strong>Montant de la commande TTC :</strong> {{ book.totalAmount }} €
-        </p>
     </div>
-    <p style="font-weight: bold">* En cas de tarif réduit, il sera nécessaire de présenter le justificatif de la réduction lors de la présentation des billets.</p>
-</div>
+        <div>
+            <table class="table table-striped table-dark">
+                <tbody>
+                {% for ticket in book.tickets %}
+                <tr style="background-color: #6d071a;">
+                    <th scope="row">
+                        <div>
+                            <a href="http://www.louvre.fr/">
+                                <img src="https://projet04ocr.billeterielouvre.siegfriedchapotin.com/img/logo-louvre.jpg" style="width:200px; padding: 20px"alt="header">
+                            </a>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="col-md-10" style="margin-left: 20px;">
+
+
+                                <div class="card-block" style="border: solid; border-color: #6d071a; padding: 15px; border-radius: 10px; color:white">
+                                    <strong>Nom :</strong> {{ ticket.name|capitalize }}<br>
+                                    <strong>Prénom  :</strong> {{ ticket.firstname|capitalize }}<br>
+                                    <strong>Date de Naissance :</strong> {{ ticket.birthday|date('d-m-Y') }}<br>
+                                    <strong>Prix du billet :</strong> {{ ticket.price|number_format(2, ',', ' ') }} €<br>
+
+                                    {% if  ticket.reduced == 1  %}
+                                        <br>
+                                        <strong>Tarif réduit :</strong> Oui*
+                                    {%endif%}
+                                </div>
+
+                        </div>
+                        <p style="font-weight: bold; color:white;">
+                            * En cas de tarif réduit, il sera nécessaire de présenter le justificatif de la réduction lors de la présentation des billets.
+                        </p>
+                    </td>
+                </tr>
+                {% endfor %}
+                <br/>
+                </tbody>
+            </table>
+
 {% endblock %}
 
 {% endblock %}

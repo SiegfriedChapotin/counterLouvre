@@ -134,14 +134,13 @@ class CounterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $stripeHandler->charge($booking->getTotalAmount()*100, $form->getData()['stripeToken']);
             $this->em->persist($booking);
             $this->em->flush();
 
             $email = $booking->getEmail();
 
-            $message = (new \Swift_Message('Vos entrées pour le Musée du Louvre'))
+            $message = (new \Swift_Message('Votre réservation pour la visite du musée du Louvre a été validée. '))
                 ->setFrom($email)
                 ->setTo($email)
                 ->setBody(
