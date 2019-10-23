@@ -125,18 +125,16 @@ class CounterController extends AbstractController
         /** @var Booking $booking */
         $booking = $request->getSession()->get('booking');
 
-
         $form = $this->createFormBuilder()
             ->add('stripeToken', HiddenType::class)
             ->getForm();
+
         $form->handleRequest($this->request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $stripeHandler->charge($booking->getTotalAmount()*100, $form->getData()['stripeToken']);
-            $this->em->persist($booking);
-            $this->em->flush();
+
 
             $email = $booking->getEmail();
 
@@ -154,9 +152,13 @@ class CounterController extends AbstractController
                 )
             ;
             $mailer->send($message);
+            $stripeHandler->charge($booking->getTotalAmount()*100, $form->getData()['stripeToken']);
+            $this->em->persist($booking);
+            $this->em->flush();
 
             return $this->redirectToRoute('order_done', ['id' => $booking->getId()]);
         }
+
 
 
         return $this->render('counter/payment.html.twig', [
