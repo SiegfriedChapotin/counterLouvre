@@ -14,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response ;
-use Symfony\Component\Validator\Validator\ValidatorInterface ;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
@@ -45,7 +44,7 @@ class CounterController extends AbstractController
     /**
      * @Route("/", name="booking")
      */
-    public function bookingAction(Request $request, EntityManagerInterface $em,ValidatorInterface $validator )
+    public function bookingAction(Request $request, EntityManagerInterface $em)
     {
         $booking = $request->getSession()->get('booking', new Booking());
         $bookingForm = $this->createForm(BookingType::class, $booking);
@@ -55,7 +54,6 @@ class CounterController extends AbstractController
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
 
             $request->getSession()->set('booking', $booking);
-
             return $this->redirectToRoute('booking_tickets', ['booking' => $booking->getId()]);
         }
 
@@ -125,40 +123,35 @@ class CounterController extends AbstractController
         /** @var Booking $booking */
         $booking = $request->getSession()->get('booking');
 
+
         $form = $this->createFormBuilder()
             ->add('stripeToken', HiddenType::class)
             ->getForm();
-
         $form->handleRequest($this->request);
+
 
 
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-
             $email = $booking->getEmail();
 
-            $message = (new \Swift_Message('Votre réservation pour la visite du musée du Louvre a été validée. '))
+            $message = (new \Swift_Message('Vos entrées pour le Musée du Louvre'))
                 ->setFrom($email)
                 ->setTo($email)
                 ->setBody(
                     $this->renderView(
                         'counter/Emails/mailer.html.twig',
-                        [
-                            'book'=>$booking
-                        ]
-                    ),
-                    'text/html'
-                )
-            ;
+                        ['book'=>$booking]),
+                         'text/html'
+                         );
             $mailer->send($message);
-            $stripeHandler->charge($booking->getTotalAmount()*100, $form->getData()['stripeToken']);
+
+ 			$stripeHandler->charge($booking->getTotalAmount()*100, $form->getData()['stripeToken']);
             $this->em->persist($booking);
             $this->em->flush();
-
             return $this->redirectToRoute('order_done', ['id' => $booking->getId()]);
         }
-
 
 
         return $this->render('counter/payment.html.twig', [

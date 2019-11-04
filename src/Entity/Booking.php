@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Validator\EntryDateConstraint;
+use App\Validator\FullDayConstraint;
+use App\Validator\HolidayDateConstraint;
+use App\Validator\CompletDayConstaint;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,11 +15,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
+ * @FullDayConstraint()
+ * @CompletDayConstaint()
  */
 class Booking
 {
     const WAITING_PAYMENT = 0;
     const PAYED = 1;
+
+    const BOOKING_FULL_DAY = true;
+    const BOOKING_HALF_DAY = false;
+    const MAX_TICKETS_PER_DAY = 1000;
 
     /**
      * @ORM\Id()
@@ -36,6 +46,8 @@ class Booking
 
     /**
      * @Assert\NotBlank
+     * @EntryDateConstraint()
+     * @HolidayDateConstraint()
      * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
      *
@@ -56,7 +68,6 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime()
      */
     private $createAt;
 

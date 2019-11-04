@@ -15,10 +15,17 @@ $(function () {
         language: "fr",
         multidate: false,
         keyboardNavigation: false,
-        daysOfWeekDisabled: "0,2",
+        daysOfWeekDisabled: "2",
         autoclose: true,
         todayHighlight: true,
-        datesDisabled: ['01/05/yyyy', '01/11/2018', '25/12/2018'],
+        datesDisabled: ['01/01/yyyy',
+            '01/05/yyyy',
+            '08/05/yyyy',
+            '14/07/yyyy',
+            '15/08/yyyy',
+            '01/11/yyyy',
+            '11/11/yyyy',
+            '25/12/yyyy'],
         toggleActive: true
     });
 
