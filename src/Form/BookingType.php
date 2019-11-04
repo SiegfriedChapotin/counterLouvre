@@ -59,6 +59,7 @@ class BookingType extends AbstractType
                     'min' => '1',
                     'value' => '1'],
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

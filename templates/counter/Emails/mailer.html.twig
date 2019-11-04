@@ -22,6 +22,7 @@
             <li class="list-group-item">Nombre de billet(s) : {{ book.numberTicket }}</li>
             <li class="list-group-item"><strong>Date de visite :</strong> {{ book.entry|date ('d/m/Y') }}</li>
             <li class="list-group-item"> <strong>Montant de la commande TTC :</strong> {{ book.totalAmount }} €</li>
+            <li class="list-group-item"> <strong>N° :</strong> {{ book.codebooking }}</li>
         </ul>
 
     </div>
@@ -29,7 +30,7 @@
             <table class="table table-striped table-dark">
                 <tbody>
                 {% for ticket in book.tickets %}
-                <tr style="background-color: #6d071a;">
+                <tr style="background-color:#772953">
                     <th scope="row">
                         <div>
                             <a href="http://www.louvre.fr/">
@@ -38,14 +39,16 @@
                         </div>
                     </th>
                     <td>
-                        <div class="col-md-10" style="margin-left: 20px;">
+                        <div class="col-md-10" style="margin-left: 20px; margin-right: 20px;">
+                            <p style="text-align:right;font-weight: bold; color:white; padding:10px;">
+                                <strong>N° Reservation :</strong> {{ book.codebooking }}
+                            </p>
 
-
-                                <div class="card-block" style="border: solid; border-color: #6d071a; padding: 15px; border-radius: 10px; color:white">
-                                    <strong>Nom :</strong> {{ ticket.name|capitalize }}<br>
-                                    <strong>Prénom  :</strong> {{ ticket.firstname|capitalize }}<br>
-                                    <strong>Date de Naissance :</strong> {{ ticket.birthday|date('d-m-Y') }}<br>
-                                    <strong>Prix du billet :</strong> {{ ticket.price|number_format(2, ',', ' ') }} €<br>
+                                <div class="card-block" style="border: solid; border-color: #E95420; padding: 15px; border-radius: 10px; background-color:white">
+                                    <strong style="color:#E95420; padding:10px;">Nom :</strong> {{ ticket.name|capitalize }}<br>
+                                    <strong style="color:#E95420; padding:10px;">Prénom  :</strong> {{ ticket.firstname|capitalize }}<br>
+                                    <strong style="color:#E95420; padding:10px;">Date de Naissance :</strong> {{ ticket.birthday|date('d-m-Y') }}<br>
+                                    <strong style="color:#E95420; padding:10px;">Prix du billet :</strong> {{ ticket.price|number_format(2, ',', ' ') }} €<br>
 
                                     {% if  ticket.reduced == 1  %}
                                         <br>
@@ -54,7 +57,7 @@
                                 </div>
 
                         </div>
-                        <p style="font-weight: bold; color:white;">
+                        <p style="font-weight: bold; color:white; padding:10px;">
                             * En cas de tarif réduit, il sera nécessaire de présenter le justificatif de la réduction lors de la présentation des billets.
                         </p>
                     </td>

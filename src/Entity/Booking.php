@@ -82,6 +82,13 @@ class Booking
     private $totalAmount;
     private $state;
 
+    /**
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $CodeBooking;
+
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -209,6 +216,18 @@ class Booking
         }
 
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getCodeBooking(): ?int
+    {
+        return $this->CodeBooking;
+    }
+
+    public function setCodeBooking(int $CodeBooking): self
+    {
+        $this->CodeBooking = $CodeBooking;
 
         return $this;
     }

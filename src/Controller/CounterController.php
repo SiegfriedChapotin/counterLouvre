@@ -7,6 +7,7 @@ use App\Entity\Ticket;
 use App\Form\BookingType;
 use App\Form\TicketsType;
 use App\Manager\TicketManager;
+use App\Services\CodeNumberGenerator;
 use App\Services\PriceCalculator;
 use App\Services\StripeHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,6 +55,7 @@ class CounterController extends AbstractController
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
 
             $request->getSession()->set('booking', $booking);
+
             return $this->redirectToRoute('booking_tickets', ['booking' => $booking->getId()]);
         }
 
@@ -68,6 +70,7 @@ class CounterController extends AbstractController
     public function bookingTicketsAction(Request $request, PriceCalculator $priceCalculator)
     {
         $booking = $request->getSession()->get('booking');
+
 
         if (!$booking) {
             return $this->redirectToRoute('booking');
@@ -94,6 +97,7 @@ class CounterController extends AbstractController
             $priceCalculator->computePrice($booking);
             return $this->redirectToRoute('indent_order', ['booking' => $booking->getId()]);
         }
+
 
         return $this->render('counter/booking_tickets.html.twig', [
             'ticketsForm' => $ticketsForm->createView(),
@@ -123,7 +127,6 @@ class CounterController extends AbstractController
         /** @var Booking $booking */
         $booking = $request->getSession()->get('booking');
 
-
         $form = $this->createFormBuilder()
             ->add('stripeToken', HiddenType::class)
             ->getForm();
@@ -133,7 +136,8 @@ class CounterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
+            $code=rand(1000,100000);
+            $booking->setCodeBooking($code);
             $email = $booking->getEmail();
 
             $message = (new \Swift_Message('Vos entrées pour le Musée du Louvre'))
